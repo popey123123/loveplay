@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий кабінет</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Ваш профіль</h2>
+        <p><strong>Ім'я:</strong> <span id="profileName"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+
+        <h3>Редагування профілю</h3>
+        <input type="text" id="updateName" placeholder="Нове ім'я">
+        <input type="email" id="updateEmail" placeholder="Новий Email">
+        <input type="password" id="updatePassword" placeholder="Новий пароль">
+        <button onclick="updateProfile()">Оновити</button>
+
+        <button onclick="logout()">Вийти</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
