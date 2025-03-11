@@ -20,30 +20,22 @@ body {
 
 .tabs {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-bottom: 15px;
 }
 
-.tab {
+.tab-btn {
     background: none;
     border: none;
     font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
     padding: 10px;
     color: #e9527d;
 }
 
-.tab.active {
+.tab-btn.active {
     border-bottom: 2px solid #e9527d;
-    font-weight: bold;
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
 }
 
 input {
@@ -75,6 +67,23 @@ button {
 }
 
 button:hover {
-    background-color: #d8486e;
+    background-color: #d1456f;
     transform: scale(1.05);
+}
+
+p {
+    font-size: 14px;
+}
+
+p a {
+    color: #e9527d;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
 }
