@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://loveplay.onrender.com";
 
 // Перемикання вкладок між "Вхід" та "Реєстрація"
 function showTab(tab) {
