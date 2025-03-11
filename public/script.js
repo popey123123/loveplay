@@ -22,14 +22,23 @@ async function register() {
         return;
     }
 
-    const res = await fetch(`${API_URL}/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password })
-    });
+    try {
+        const res = await fetch(`${API_URL}/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password })
+        });
 
-    const data = await res.json();
-    alert(data.msg);
+        const data = await res.json();
+        alert(data.msg);
+
+        if (res.ok) {
+            showTab('login');
+        }
+    } catch (error) {
+        console.error("Помилка реєстрації:", error);
+        alert("❌ Помилка підключення до сервера.");
+    }
 }
 
 // ✅ Вхід (авторизація)
@@ -42,19 +51,24 @@ async function login() {
         return;
     }
 
-    const res = await fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-    });
+    try {
+        const res = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
 
-    const data = await res.json();
-    if (data.token) {
-        localStorage.setItem("token", data.token);
-        alert("✅ Вхід успішний!");
-        window.location.href = "profile.html";
-    } else {
-        alert(data.msg);
+        const data = await res.json();
+        if (res.ok) {
+            localStorage.setItem("token", data.token);
+            alert("✅ Вхід успішний!");
+            window.location.href = "profile.html";
+        } else {
+            alert(data.msg);
+        }
+    } catch (error) {
+        console.error("Помилка входу:", error);
+        alert("❌ Помилка підключення до сервера.");
     }
 }
 
@@ -67,4 +81,37 @@ async function loadProfile() {
         return;
     }
 
-    const
+    try {
+        const res = await fetch(`${API_URL}/profile`, {
+            method: "GET",
+            headers: { "x-auth-token": token }
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+            document.getElementById("profileName").textContent = data.name;
+            document.getElementById("profileEmail").textContent = data.email;
+        } else {
+            alert(data.msg);
+            window.location.href = "index.html";
+        }
+    } catch (error) {
+        console.error("Помилка завантаження профілю:", error);
+    }
+}
+
+// ✅ Вихід
+function logout() {
+    localStorage.removeItem("token");
+    alert("Ви вийшли з акаунту");
+    window.location.href = "index.html";
+}
+
+// Якщо ми на profile.html, то завантажуємо дані користувача
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.pathname.includes("profile.html")) {
+        loadProfile();
+    } else {
+        showTab('login'); // Встановити вкладку за замовчуванням
+    }
+});
