@@ -13,11 +13,9 @@ const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
 // Підключення до MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.log(err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // Модель користувача
 const UserSchema = new mongoose.Schema({
