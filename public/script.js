@@ -1,10 +1,26 @@
 const API_URL = "http://localhost:5000";
 
+// Перемикання вкладок між "Вхід" та "Реєстрація"
+function showTab(tab) {
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('register').classList.add('hidden');
+
+    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+    document.querySelector(`.tab-btn[onclick="showTab('${tab}')"]`).classList.add("active");
+
+    document.getElementById(tab).classList.remove('hidden');
+}
+
 // ✅ Реєстрація
 async function register() {
     const name = document.getElementById("registerName").value;
     const email = document.getElementById("registerEmail").value;
     const password = document.getElementById("registerPassword").value;
+
+    if (!name || !email || !password) {
+        alert("❌ Заповніть всі поля!");
+        return;
+    }
 
     const res = await fetch(`${API_URL}/register`, {
         method: "POST",
@@ -20,6 +36,11 @@ async function register() {
 async function login() {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
+
+    if (!email || !password) {
+        alert("❌ Введіть email та пароль!");
+        return;
+    }
 
     const res = await fetch(`${API_URL}/login`, {
         method: "POST",
@@ -46,42 +67,4 @@ async function loadProfile() {
         return;
     }
 
-    const res = await fetch(`${API_URL}/profile`, {
-        method: "GET",
-        headers: { "x-auth-token": token }
-    });
-
-    const data = await res.json();
-    document.getElementById("profileName").textContent = data.name;
-    document.getElementById("profileEmail").textContent = data.email;
-}
-
-// ✅ Оновлення профілю
-async function updateProfile() {
-    const token = localStorage.getItem("token");
-    const name = document.getElementById("updateName").value;
-    const email = document.getElementById("updateEmail").value;
-    const password = document.getElementById("updatePassword").value;
-
-    const res = await fetch(`${API_URL}/profile`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json", "x-auth-token": token },
-        body: JSON.stringify({ name, email, password })
-    });
-
-    const data = await res.json();
-    alert("✅ Профіль оновлено!");
-    loadProfile();
-}
-
-// ✅ Вихід
-function logout() {
-    localStorage.removeItem("token");
-    alert("Ви вийшли з акаунту");
-    window.location.href = "index.html";
-}
-
-// Якщо ми на profile.html, то завантажуємо дані користувача
-if (window.location.pathname.includes("profile.html")) {
-    loadProfile();
-}
+    const
