@@ -7,30 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
         <div class="tabs">
             <button class="tab-btn active" onclick="showTab('login')">Вхід</button>
             <button class="tab-btn" onclick="showTab('register')">Реєстрація</button>
         </div>
 
-        <!-- Вкладка Вхід -->
-        <div class="tab-content" id="login">
+        <div id="login" class="tab-content">
             <h2>Вхід</h2>
             <input type="email" id="loginEmail" placeholder="Email">
             <input type="password" id="loginPassword" placeholder="Пароль">
             <button onclick="login()">Увійти</button>
-            <p class="toggle-text" onclick="showTab('register')">У мене немає акаунта</p>
+            <p><a href="#" onclick="showTab('register')">У мене немає акаунта</a></p>
         </div>
 
-        <!-- Вкладка Реєстрація -->
-        <div class="tab-content hidden" id="register">
+        <div id="register" class="tab-content hidden">
             <h2>Реєстрація</h2>
             <input type="text" id="registerName" placeholder="Ім'я">
             <input type="email" id="registerEmail" placeholder="Email">
             <input type="password" id="registerPassword" placeholder="Пароль">
             <button onclick="register()">Зареєструватися</button>
-            <p class="toggle-text" onclick="showTab('login')">У мене вже є акаунт</p>
+            <p><a href="#" onclick="showTab('login')">У мене вже є акаунт</a></p>
         </div>
     </div>
 
