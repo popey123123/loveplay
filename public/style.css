@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #ffe6eb; 
+    background-color: #fecdbb;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,15 +10,34 @@ body {
 
 .container {
     background: white;
-    padding: 25px;
+    padding: 30px;
     width: 350px;
     border-radius: 12px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     transition: 0.3s ease-in-out;
+    text-align: center;
 }
 
-.container:hover {
-    transform: scale(1.02);
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    color: #e9527d;
+    border-bottom: 3px solid transparent;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    font-weight: bold;
+    border-bottom: 3px solid #e9527d;
 }
 
 input {
@@ -29,18 +47,18 @@ input {
     padding: 12px;
     font-size: 16px;
     border-radius: 8px;
-    border: 1px solid #ffb6c1;
+    border: 1px solid #e9527d;
     outline: none;
     transition: 0.3s;
 }
 
 input:focus {
-    border-color: #ff8fa3;
-    box-shadow: 0px 0px 5px rgba(255, 182, 193, 0.8);
+    border-color: #e9527d;
+    box-shadow: 0px 0px 5px rgba(233, 82, 125, 0.8);
 }
 
 button {
-    background-color: #ffb6c1;
+    background-color: #e9527d;
     color: white;
     border: none;
     cursor: pointer;
@@ -51,6 +69,22 @@ button {
 }
 
 button:hover {
-    background-color: #ff8fa3;
+    background-color: #d6476b;
     transform: scale(1.05);
+}
+
+.toggle-text {
+    margin-top: 10px;
+    color: #e9527d;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.3s;
+}
+
+.toggle-text:hover {
+    color: #d6476b;
+}
+
+.hidden {
+    display: none;
 }
